@@ -1,0 +1,73 @@
+/* Estilo para la lista de reseñas */
+.reviews-list {
+  padding: 20px;
+}
+
+/* Estilo de cada ítem de la reseña */
+.review-item {
+  display: flex; /* Usamos flexbox para distribuir el espacio */
+  flex-direction: column; /* Los elementos dentro de la reseña estarán en una columna */
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+/* Estilo de los párrafos dentro de cada reseña */
+.review-item p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  margin: 5px 0;
+  word-wrap: break-word; /* Permite que las palabras largas se ajusten al contenedor */
+}
+
+/* Calificación y comentario se distribuyen bien en la columna */
+.review-item p strong {
+  color: #1976d2;
+  margin-right: 5px; /* Agregar un pequeño margen después del texto "strong" */
+}
+
+/* Estilo para los comentarios (textos de reseña) */
+.review-item p:nth-child(3) {
+  font-style: italic;
+  color: #555;
+  margin-top: 5px;
+}
+
+/* Estilo para los botones de acción */
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}
+
+mat-icon-button {
+  display: inline-flex; /* Asegúrate de que el botón tenga display adecuado */
+}
+
+
+button {
+  background-color: #1976d2;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #1565c0;
+}
+
+/* Estilo para los iconos de los botones */
+mat-icon {
+  font-size: 18px;
+}
+
+/* Estilo para la lista de elementos */
+mat-list-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}

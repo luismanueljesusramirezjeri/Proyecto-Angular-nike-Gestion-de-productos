@@ -1,0 +1,138 @@
+
+
+
+<!-- inicio.component.html -->
+
+<div class="container mt-4">
+    <h1 class="text-center">Gestión de Productos</h1>
+  
+    <!-- Filtros -->
+    <div class="filters mt-4">
+      <label for="filterName">Filtrar por Nombre:</label>
+      <input id="filterName" type="text" [(ngModel)]="filters.name" (input)="filterProducts()" placeholder="Escriba un nombre" class="form-control mb-3">
+  
+      <label for="filterCategory">Filtrar por Categoría:</label>
+      <input id="filterCategory" type="text" [(ngModel)]="filters.category" (input)="filterProducts()" placeholder="Escriba una categoría" class="form-control mb-3">
+
+        <!-- Nueva opción para incluir productos sin imagen -->
+        <div class="form-check">
+            <input id="includeNoImage" type="checkbox" class="form-check-input" [(ngModel)]="filters.includeNoImage" (change)="filterProducts()">
+            <label class="form-check-label" for="includeNoImage">Incluir productos sin imagen</label>
+        </div>
+    </div>
+  
+    <!-- Tabla de productos -->
+    <div class="product-table mb-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of filteredProducts">
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>\${{ product.price }}</td>
+            <td>{{ product.stockQuantity }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="editProduct(product)">Editar</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Formulario de producto -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2>{{ isEdit ? 'Editar Producto' : 'Crear Nuevo Producto' }}</h2>
+        <form (ngSubmit)="saveProduct()">
+          <div class="mb-3">
+            <label for="productName" class="form-label">Nombre:</label>
+            <input id="productName" type="text" [(ngModel)]="selectedProduct.name" name="name" class="form-control" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="productCode" class="form-label">Código:</label>
+            <input id="productCode" type="text" [(ngModel)]="selectedProduct.code" name="code" class="form-control" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="productDescription" class="form-label">Descripción:</label>
+            <input id="productDescription" type="text" [(ngModel)]="selectedProduct.description" name="description" class="form-control">
+          </div>
+  
+          <div class="mb-3">
+            <label for="productPrice" class="form-label">Precio:</label>
+            <input id="productPrice" type="number" [(ngModel)]="selectedProduct.price" name="price" class="form-control" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="productStock" class="form-label">Cantidad en Stock:</label>
+            <input id="productStock" type="number" [(ngModel)]="selectedProduct.stockQuantity" name="stockQuantity" class="form-control" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="productCategory" class="form-label">Categoría:</label>
+            <input id="productCategory" type="text" [(ngModel)]="selectedProduct.category" name="category" class="form-control" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="productImageUrl" class="form-label">URL de Imagen:</label>
+            <input id="productImageUrl" type="text" [(ngModel)]="selectedProduct.imageUrl" name="imageUrl" class="form-control">
+          </div>
+  
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">{{ isEdit ? 'Actualizar Producto' : 'Crear Producto' }}</button>
+            <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Información de la imagen -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h4>Imagen del Producto</h4>
+        <img *ngIf="selectedProduct.imageUrl" [src]="selectedProduct.imageUrl" class="img-fluid" alt="Producto" style="max-height: 300px; object-fit: cover;">
+        <p *ngIf="!selectedProduct.imageUrl" class="text-muted">No hay imagen disponible.</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <!-- inicio.component.html -->
+  
+  <div class="container mt-4">
+      <h1 class="text-center">Gestión de Productos</h1>
+    
+  <!-- Cards de productos -->
+  <div class="product-cards mb-4 row">
+      <div class="col-md-4" *ngFor="let product of filteredProducts">
+        <div class="card">
+          <img *ngIf="product.imageUrl" [src]="product.imageUrl" class="card-img-top" alt="{{ product.name }}" 
+               style="max-height: 150px; width: 100%; object-fit: contain;">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p class="card-text"><strong>Categoría:</strong> {{ product.category }}</p>
+            <p class="card-text"><strong>Precio:</strong> \${{ product.price }}</p>
+            <p class="card-text"><strong>Stock:</strong> {{ product.stockQuantity }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <button class="btn btn-warning btn-sm" (click)="editProduct(product)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  

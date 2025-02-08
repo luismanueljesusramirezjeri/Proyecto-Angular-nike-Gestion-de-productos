@@ -1,0 +1,119 @@
+
+
+    <!--  INICIO VIDEO INTRUCCION NIKE SAC -->
+    <div class="container">
+      <div class="row">
+          <div class="col position-relative">
+              <figure class="text-center">
+                  <!-- Video responsivo -->
+                  <video #videoElement id="video" aria-describedby="Company-Hero Loop 032323" 
+                      src="NIKE_COMPANY_loop_032323.mp4" autoplay loop muted playsinline 
+                      class="img-fluid" style="max-width: 100%; height: auto;">
+                  </video>
+              </figure>
+          </div>
+      </div>
+  </div>
+  <!--  FIN VIDEO INTRUCCION NIKE SAC -->
+
+
+
+
+      <!-- Sección de Testimonios -->
+      <section id="testimonios" class="py-5">
+          <div class="container">
+              <h2 class="text-center">Lo que dicen nuestros clientes</h2>
+              <div class="row mt-4">
+                  <!-- Testimonio 1 -->
+                  <div class="col-md-4">
+                      <blockquote class="blockquote">
+                          <p>"La mejor experiencia de compra, las zapatillas Nike son increíbles!"</p>
+                          <footer class="blockquote-footer">Carlos Pérez</footer>
+                      </blockquote>
+                  </div>
+                  <!-- Testimonio 2 -->
+                  <div class="col-md-4">
+                      <blockquote class="blockquote">
+                          <p>"Nike ha mejorado mi rendimiento deportivo. ¡Recomendado 100%!"</p>
+                          <footer class="blockquote-footer">Ana García</footer>
+                      </blockquote>
+                  </div>
+                  <!-- Testimonio 3 -->
+                  <div class="col-md-4">
+                      <blockquote class="blockquote">
+                          <p>"Comodidad y estilo en cada paso. No uso otra marca."</p>
+                          <footer class="blockquote-footer">Luis Martínez</footer>
+                      </blockquote>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <!-- FIN de Testimonios -->
+
+
+
+
+
+
+<!-- Sección de Productos -->
+<section  class="py-5" style="background-color: #f9f9f9;">
+  <div class="container">
+    <h2 class="text-center" style="font-size: 90px; color: #4e73df; font-weight: bold; margin-bottom: 40px;">Nuestros Productos Destacados</h2>
+    <h2 class="text-center" style="font-size: 40px; color: #1cc88a; margin-bottom: 40px;">(Solicita tu descuento especial Suscríbete)</h2>
+  
+
+
+<!-- inicio.component.html -->
+<div class="container mt-4">
+  <h1 class="text-center">Filtrar Productos de interes</h1>
+  <!-- Filtros -->
+  <div class="filters mt-4">
+    <label for="filterName">Filtrar por Nombre:</label>
+    <input id="filterName" type="text" [(ngModel)]="filters.name" (input)="filterProducts()" placeholder="Escriba un nombre" class="form-control mb-3">
+
+    <label for="filterCategory">Filtrar por Categoría:</label>
+    <input id="filterCategory" type="text" [(ngModel)]="filters.category" (input)="filterProducts()" placeholder="Escriba una categoría" class="form-control mb-3">
+  </div>
+</div>
+
+
+
+    <div id="productos" class="row mt-4">
+      <!-- Cards de productos -->
+      <div class="product-cards mb-4 row justify-content-center">
+        <div class="col-md-4 mb-4" *ngFor="let product of filteredProducts">
+          <div *ngIf="product.imageUrl && product.imageUrl.trim() !== ''" class="card border-0 shadow-lg rounded-lg">
+            <div class="card-img-wrapper" style="position: relative; height: 200px; overflow: hidden;">
+              <img [src]="product.imageUrl" class="card-img-top" alt="{{ product.name }}"
+                   style="max-height: 100%; width: 100%; object-fit: contain; transition: transform 0.3s ease;">
+              <div class="card-img-overlay d-flex justify-content-center align-items-center">
+                <h5 class="text-white font-weight-bold" style="font-size: 30px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">{{ product.name }}</h5>
+              </div>
+            </div>
+            <div class="card-body" style="background-color: #ffffff;">
+              <p class="card-text" style="color: #333333; font-size: 14px;">{{ product.description }}</p>
+              <p class="card-text text-muted"><strong>Categoría:</strong> {{ product.category }}</p>
+              <p class="card-text text-muted"><strong>Precio:</strong> S/ {{ product.price }}</p>
+              <p class="card-text text-muted"><strong>Stock:</strong> {{ product.stockQuantity }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

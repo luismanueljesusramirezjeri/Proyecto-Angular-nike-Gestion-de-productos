@@ -1,0 +1,128 @@
+<div class="container mt-5">
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h2 class="text-center">Filtrar Almacenes</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="filterManagerName">Nombre del Encargado</label>
+              <input
+                type="text"
+                id="filterManagerName"
+                class="form-control"
+                [(ngModel)]="filters.managerName"
+                name="filterManagerName"
+                (ngModelChange)="filterWarehouses()"
+                placeholder="Filtrar por nombre del encargado"
+              />
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="filterStatus">Estado</label>
+              <select id="filterStatus" class="form-control" [(ngModel)]="filters.status" name="filterStatus" (ngModelChange)="filterWarehouses()">
+                <option value="">Todos</option>
+                <option value="active">Activo</option>
+                <option value="inactive">Inactivo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Formulario de Almacén -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3 class="text-center">{{ isEdit ? 'Editar Almacén' : 'Crear Almacén' }}</h3>
+        
+        <form (ngSubmit)="createWarehouse()">
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Nombre del Almacén</label>
+                <input type="text" id="name" class="form-control" [(ngModel)]="selectedWarehouse.name" name="name" required />
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="location">Ubicación</label>
+                <input type="text" id="location" class="form-control" [(ngModel)]="selectedWarehouse.location" name="location" required />
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="capacity">Capacidad</label>
+                <input type="number" id="capacity" class="form-control" [(ngModel)]="selectedWarehouse.capacity" name="capacity" required min="0" />
+              </div>
+            </div>
+  
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="status">Estado</label>
+                <select id="status" class="form-control" [(ngModel)]="selectedWarehouse.status" name="status">
+                  <option value="active">Activo</option>
+                  <option value="inactive">Inactivo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="managerName">Nombre del Encargado</label>
+            <input type="text" id="managerName" class="form-control" [(ngModel)]="selectedWarehouse.managerName" name="managerName" />
+          </div>
+  
+          <div class="form-group">
+            <label for="managerContact">Contacto del Encargado</label>
+            <input type="text" id="managerContact" class="form-control" [(ngModel)]="selectedWarehouse.managerContact" name="managerContact" />
+          </div>
+  
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">{{ isEdit ? 'Actualizar' : 'Crear' }}</button>
+            <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Lista de Almacenes -->
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-center">Lista de Almacenes</h3>
+        <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Nombre</th>
+              <th>Ubicación</th>
+              <th>Capacidad</th>
+              <th>Estado</th>
+              <th>Encargado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let warehouse of filteredWarehouses">
+              <td>{{ warehouse.name }}</td>
+              <td>{{ warehouse.location }}</td>
+              <td>{{ warehouse.capacity }}</td>
+              <td><span class="badge" [ngClass]="{'badge-success': warehouse.status === 'active', 'badge-danger': warehouse.status === 'inactive'}" style="color: black;">{{ warehouse.status | uppercase }}</span></td>
+              <td>{{ warehouse.managerName || 'No asignado' }}</td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="editWarehouse(warehouse)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteWarehouse(warehouse.id)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+  </div>

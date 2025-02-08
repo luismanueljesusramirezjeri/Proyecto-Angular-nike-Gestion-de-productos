@@ -1,0 +1,83 @@
+<!-- CABEZERO DE LA PAGINA -->
+<header class="bg-dark text-white text-center">
+    <div class="container py-2">
+      <!-- Imagen -->
+      <img src="Nike-1.png" alt="Logo" class="img-fluid" style="max-height: 1200px; width: auto;">
+  
+      <!-- Título y Subtítulo -->
+      <div>
+        <h1 class="protest-strike-regular">Empresa Nike S.A.C</h1>
+        <p class="lead">*Si tienes un cuerpo, eres un atleta</p>
+        <p class="lead">Innovando para ti, con nuevos productos y servicios</p>
+        <a href="#productos" class="btn btn-primary btn-lg">Descubre nuestros productos</a>
+      </div>
+    </div>
+  </header>
+
+
+<!-- Comienzo barra Menu -->
+<!-- Comienzo barra Menu -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="Nike-1.png" alt="Logo Nike" style="height: 40px; width: auto;">
+            Nike
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" type="button" routerLink="/producto" routerLinkActive="active">Productos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" type="button" routerLink="/proveedores"
+                        routerLinkActive="active">Proveedores</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" type="button" routerLink="/reseñas" routerLinkActive="active">Reseñas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" type="button" routerLink="/GestionAlmacenes" routerLinkActive="active">Gestión
+                        de Almacenes</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" type="button" routerLink="/GestionProductos" routerLinkActive="active">Gestión
+                        de Productos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Fin barra Menu -->
+<!-- Fin barra Menu -->
+<!-- Fin barra Menu -->
+<!-- Fin barra Menu -->
+
+
+<!-- Contenido del componente -->
+<router-outlet></router-outlet> <!-- Aquí se cargarán las rutas -->
+
+
+
+
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-4">
+    <p>&copy; 2024 Nike. Todos los derechos reservados.</p>
+    <p>&copy; Todo material utilizado es nivel educativo no lucrativo realizado por estudiantes.</p>
+    <p>&copy; De IDAT de la Carrera TECNICA - "Desarollo de Sistemas de Informacion IV Ciclo" .</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="#" class="text-white">Nuestras tiendas</a></li>
+        <li class="list-inline-item"><a href="#" class="text-white">Política de Privacidad</a></li>
+        <li class="list-inline-item"><a href="#" class="text-white">Contacto</a></li>
+    </ul>
+</footer>

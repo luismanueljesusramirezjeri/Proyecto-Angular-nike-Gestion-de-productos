@@ -1,0 +1,149 @@
+<div class="container my-5">
+  <!-- Formulario de creación/edición -->
+  <div class="card shadow-lg border-0 mb-5">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">{{ isEdit ? 'Editar Reseña' : 'Crear Reseña' }}</h5>
+    </div>
+    <form (ngSubmit)="isEdit ? updateReview() : createReview()">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="reviewerName" class="form-label">Nombre del Reseñador</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="reviewerName" 
+              [(ngModel)]="selectedReview.reviewerName" 
+              name="reviewerName" 
+              placeholder="Ingrese su nombre"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="reviewerEmail" class="form-label">Correo Electrónico</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="reviewerEmail" 
+              [(ngModel)]="selectedReview.reviewerEmail" 
+              name="reviewerEmail"
+              placeholder="ejemplo@correo.com"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="rating" class="form-label">Calificación</label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="rating" 
+              [(ngModel)]="selectedReview.rating" 
+              name="rating" 
+              min="1" max="5"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="reviewTitle" class="form-label">Título de la Reseña</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="reviewTitle" 
+              [(ngModel)]="selectedReview.reviewTitle" 
+              name="reviewTitle"
+              placeholder="Ejemplo: Excelente producto"
+            />
+          </div>
+          <div class="col-12">
+            <label for="comment" class="form-label">Comentario</label>
+            <textarea 
+              class="form-control" 
+              id="comment" 
+              [(ngModel)]="selectedReview.comment" 
+              name="comment" 
+              rows="4" 
+              placeholder="Escriba su comentario aquí..."
+              required
+            ></textarea>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input 
+                type="checkbox" 
+                class="form-check-input" 
+                id="isVerified" 
+                [(ngModel)]="selectedReview.isVerified" 
+                name="isVerified"
+              />
+              <label for="isVerified" class="form-check-label">Reseña Verificada</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary me-2">
+          {{ isEdit ? 'Actualizar' : 'Crear' }} Reseña
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Tabla de reseñas -->
+  <div class="card shadow-lg border-0">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">Reseñas</h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo Electrónico</th>
+            <th>Calificación</th>
+            <th>Título de la Reseña</th>
+            <th>Comentario</th>
+            <th>Reseña Verificada</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reviewItem of reviews">
+            <td>{{ reviewItem.id }}</td>
+            <td>{{ reviewItem.reviewerName }}</td>
+            <td>{{ reviewItem.reviewerEmail || 'N/A' }}</td>
+            <td>{{ reviewItem.rating }}</td>
+            <td>{{ reviewItem.reviewTitle || 'N/A' }}</td>
+            <td>{{ reviewItem.comment || 'N/A' }}</td>
+            <td>
+              <span class="badge bg-success" *ngIf="reviewItem.isVerified">Sí</span>
+              <span class="badge bg-danger" *ngIf="!reviewItem.isVerified">No</span>
+            </td>
+            <td>
+              <button 
+                class="btn btn-warning btn-sm me-1" 
+                (click)="editReview(reviewItem)">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button 
+                class="btn btn-danger btn-sm" 
+                (click)="deleteReview(reviewItem.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="reviews.length === 0" class="alert alert-info m-3">
+      No hay reseñas disponibles.
+    </div>
+  </div>
+</div>
+
+<!-- Enlace a Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Enlace a Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

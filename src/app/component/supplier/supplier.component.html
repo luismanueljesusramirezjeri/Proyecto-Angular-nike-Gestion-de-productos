@@ -1,0 +1,180 @@
+<div class="container mt-4">
+  <!-- Título Principal -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Gestión de Proveedores</h2>
+    <p class="text-muted">Administra tus proveedores de manera eficiente</p>
+  </div>
+
+  <!-- Filtro por nombre -->
+  <div class="mb-4">
+    <label for="filterName" class="form-label fw-bold">Filtrar por Nombre</label>
+    <input 
+      type="text" 
+      class="form-control shadow-sm" 
+      id="filterName" 
+      [(ngModel)]="filterName" 
+      placeholder="Buscar por nombre"
+      (ngModelChange)="filterSuppliers()"
+    />
+  </div>
+
+  <!-- Formulario de creación/edición -->
+  <form (ngSubmit)="isEdit ? updateSupplier() : createSupplier()" class="mb-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">{{ isEdit ? 'Editar Proveedor' : 'Crear Proveedor' }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Primera columna -->
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label for="name" class="form-label fw-bold">Nombre</label>
+              <input 
+                type="text" 
+                class="form-control shadow-sm" 
+                id="name" 
+                [(ngModel)]="selectedSupplier.name" 
+                name="name" 
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="contactInfo" class="form-label fw-bold">Información de Contacto</label>
+              <input 
+                type="text" 
+                class="form-control shadow-sm" 
+                id="contactInfo" 
+                [(ngModel)]="selectedSupplier.contactInfo" 
+                name="contactInfo"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="email" class="form-label fw-bold">Correo Electrónico</label>
+              <input 
+                type="email" 
+                class="form-control shadow-sm" 
+                id="email" 
+                [(ngModel)]="selectedSupplier.email" 
+                name="email" 
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="phoneNumber" class="form-label fw-bold">Número de Teléfono</label>
+              <input 
+                type="tel" 
+                class="form-control shadow-sm" 
+                id="phoneNumber" 
+                [(ngModel)]="selectedSupplier.phoneNumber" 
+                name="phoneNumber"
+              />
+            </div>
+          </div>
+
+          <!-- Segunda columna -->
+          <div class="col-md-6">
+            <div class="form-group mb-3">
+              <label for="address" class="form-label fw-bold">Dirección</label>
+              <input 
+                type="text" 
+                class="form-control shadow-sm" 
+                id="address" 
+                [(ngModel)]="selectedSupplier.address" 
+                name="address"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="city" class="form-label fw-bold">Ciudad</label>
+              <input 
+                type="text" 
+                class="form-control shadow-sm" 
+                id="city" 
+                [(ngModel)]="selectedSupplier.city" 
+                name="city"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="country" class="form-label fw-bold">País</label>
+              <input 
+                type="text" 
+                class="form-control shadow-sm" 
+                id="country" 
+                [(ngModel)]="selectedSupplier.country" 
+                name="country"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="websiteUrl" class="form-label fw-bold">URL del Sitio Web</label>
+              <input 
+                type="url" 
+                class="form-control shadow-sm" 
+                id="websiteUrl" 
+                [(ngModel)]="selectedSupplier.websiteUrl" 
+                name="websiteUrl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-end">
+        <button type="submit" class="btn btn-primary">
+          {{ isEdit ? 'Actualizar' : 'Crear' }} Proveedor
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Tabla de proveedores -->
+  <div *ngIf="filteredSuppliers.length > 0" class="table-responsive">
+    <table class="table table-hover shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo Electrónico</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Ciudad</th>
+          <th>País</th>
+          <th>URL del Sitio Web</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let supplierItem of filteredSuppliers">
+          <td>{{ supplierItem.id }}</td>
+          <td>{{ supplierItem.name }}</td>
+          <td>{{ supplierItem.email || 'N/A' }}</td>
+          <td>{{ supplierItem.phoneNumber || 'N/A' }}</td>
+          <td>{{ supplierItem.address || 'N/A' }}</td>
+          <td>{{ supplierItem.city || 'N/A' }}</td>
+          <td>{{ supplierItem.country || 'N/A' }}</td>
+          <td>
+            <a href="{{ supplierItem.websiteUrl }}" target="_blank">
+              {{ supplierItem.websiteUrl || 'N/A' }}
+            </a>
+          </td>
+          <td>
+            <button 
+              class="btn btn-warning btn-sm me-1" 
+              (click)="editSupplier(supplierItem)">
+              <i class="bi bi-pencil"></i> Editar
+            </button>
+            <button 
+              class="btn btn-danger btn-sm" 
+              (click)="deleteSupplier(supplierItem.id)">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mensaje cuando no hay proveedores -->
+  <div *ngIf="filteredSuppliers.length === 0" class="alert alert-info text-center">
+    No hay proveedores disponibles.
+  </div>
+</div>

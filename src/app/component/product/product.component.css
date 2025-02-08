@@ -1,0 +1,53 @@
+/* Estilo para los botones de acción */
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Separar los botones */
+}
+
+.update-btn, .delete-btn {
+  padding: 5px 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición para el color */
+}
+
+.update-btn {
+  background-color: #007bff; /* Color del botón Actualizar */
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #0056b3; /* Color al pasar el mouse sobre Actualizar */
+}
+
+.delete-btn {
+  background-color: #dc3545; /* Color del botón Eliminar */
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333; /* Color al pasar el mouse sobre Eliminar */
+}
+
+/* Asegura que el contenedor de la tabla no colapse los bordes */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.product-table th, .product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #f4f4f4;
+}
+
+/* Alineación a la izquierda para el botón de crear producto */
+.create-product-btn {
+  margin-bottom: 20px;
+  text-align: left;  /* Cambiar la alineación a la izquierda */
+}
